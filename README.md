@@ -13,7 +13,7 @@ separate app to meet your needs.
 ** BUL_LINK_SERSOL_KEY = 'key'
 * Start the Django development server
 * Begin testing
-** Go to http://localhost:8000/?id=pmid:20133564 to see a sample citation  
+ * Go to http://localhost:8000/?id=pmid:20133564 to see a sample citation  
 
 Features
 --------
