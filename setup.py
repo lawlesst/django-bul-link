@@ -7,7 +7,7 @@ def read(fname):
 setup(
     name = "django-bul-link",
     version = "1",
-    url = 'https://github.com/lawlesst/django-link360',
+    url = 'https://github.com/lawlesst/django-bul-link',
     description = "An interface to the Serial Solutions 360 Link API.",
     long_description = read('README'),
 
