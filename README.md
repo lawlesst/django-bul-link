@@ -10,7 +10,7 @@ separate app to meet your needs.
 * Install django-link360 using pip: pip install git+git://github.com/lawlesst/django-bul-link.git
 * Add the django-link360 views to your projects urls.py
 * Add your Serial Solutions API key to settings.py as
-** BUL_LINK_SERSOL_KEY = 'key'
+ * BUL_LINK_SERSOL_KEY = 'key'
 * Start the Django development server
 * Begin testing
  * Go to http://localhost:8000/?id=pmid:20133564 to see a sample citation  
