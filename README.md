@@ -1,4 +1,4 @@
-django-link360
+django-bul-link
 ================
 
 A basic interface to the Serial Solutions 360 Link API.  This is intended to 
