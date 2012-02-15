@@ -7,7 +7,8 @@ up and running quickly.  You will probably want to subclass these views in a
 separate app to meet your needs. 
 
 * Setup a Django project or use an existing project
-* Install django-link360 using pip: pip install git+git://github.com/lawlesst/django-bul-link.git
+* Install django-link360 using pip:
+ *pip install git+git://github.com/lawlesst/django-bul-link.git
 * Add the django-link360 views to your projects urls.py
 * Add your Serial Solutions API key to settings.py as
  * BUL_LINK_SERSOL_KEY = 'key'
