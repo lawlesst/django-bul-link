@@ -38,7 +38,7 @@ class JSONResponseMixin(object):
         # Note: this needs to be better to ensure that you are seralizing what
         # is needed as JSON.  For now just popping known problems.
         #Also see - https://docs.djangoproject.com/en/dev/topics/serialization/
-        remove = ['user', 'resource']
+        remove = ['user', 'resource', 'profile']
         for rem in remove:
             try:
                 del context[rem]
@@ -74,7 +74,7 @@ class BulLinkBase(TemplateView, JSONResponseMixin):
         cache_key = "resolved-%s" % self.resource.id
         data = cache.get(cache_key, None)
         if not data:
-            data = get_sersol_data(query, key=SERSOL_KEY)
+            data = get_sersol_data(query, key=SERSOL_KEY, timeout=10)
             cache.set(cache_key, data, cache_timeout)
         return data
     
