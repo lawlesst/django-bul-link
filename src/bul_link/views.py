@@ -2,6 +2,7 @@ from django.conf import settings
 from django.core.cache import cache
 from django.http import HttpResponse
 from django.views.generic import TemplateView
+from django.core.urlresolvers import get_script_prefix
 
 #standard lib
 import base64
@@ -47,6 +48,10 @@ class JSONResponseMixin(object):
         return json.dumps(context)
 
 class BulLinkBase(TemplateView, JSONResponseMixin):
+    
+    def get_base_url(self):
+        app_prefix = get_script_prefix()
+        return ''.join(('http', ('', 's')[self.request.is_secure()], '://', self.request.META['HTTP_HOST']))
     
     def get_context_data(self, **kwargs):
         context = super(BulLinkBase, self).get_context_data(**kwargs)
