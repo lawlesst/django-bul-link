@@ -18,7 +18,7 @@ from py360link import get_sersol_data, Resolved
 
 from models import Resource
 
-from app_settings import SERSOL_KEY, CACHE_TIMEOUT, QUERY_SKIP_KEYS
+from app_settings import SERSOL_KEY, CACHE_TIMEOUT, QUERY_SKIP_KEYS, SERSOL_TIMEOUT
 
 class JSONResponseMixin(object):
     def render_to_response(self, context):
@@ -79,7 +79,7 @@ class BulLinkBase(TemplateView, JSONResponseMixin):
         cache_key = "resolved-%s" % self.resource.id
         data = cache.get(cache_key, None)
         if not data:
-            data = get_sersol_data(query, key=SERSOL_KEY, timeout=10)
+            data = get_sersol_data(query, key=SERSOL_KEY, timeout=SERSOL_TIMEOUT)
             cache.set(cache_key, data, cache_timeout)
         return data
     

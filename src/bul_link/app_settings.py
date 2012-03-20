@@ -5,6 +5,8 @@ SERSOL_KEY = getattr(settings, 'BUL_LINK_SERSOL_KEY', None)
 
 if SERSOL_KEY is None:
      raise ImproperlyConfigured('The link360 app requires a valid SERSOL_KEY')
+
+SERSOL_TIMEOUT = getattr(settings, 'BUL_LINK_SERSOL_TIMEOUT', 30)
  
 PERMALINK_PREFIX = getattr(settings, 'BUL_LINK_PERMALINK_PREFIX', 'bL')
 
