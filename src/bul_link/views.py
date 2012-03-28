@@ -58,6 +58,32 @@ class BulLinkBase(TemplateView, JSONResponseMixin):
         context['direct_link'] = None
         return context
     
+    def get_referrer(self):
+        """
+        Get the referring site and append to links headed elsewhere.  Helpful for
+        tracking down ILL request sources.  This should really be in a separate 
+        OpenURL parsing utility but was having trouble pulling it out given the
+        existing flow.  This ensures that it gets added to the OpenURL
+        that is generated from 360Link data. 
+        """
+        sid = None
+        try:
+            qdict = self.resource.query
+        except AttributeError:
+            qdict = urlparse.parse_qs(self.scrub_query())
+        sid = qdict.get('sid', None)
+        #Try rfr_id if not found in sid.
+        if not sid:
+            sid = qdict.get('rfr_id', None)
+        if not sid:
+            oclc = qdict.get('pid', None)
+            if (oclc) and ('accession number' in oclc):
+                sid = 'OCLC'
+        if sid:
+            return "%s-%s" % (sid, ea) 
+        else:
+            return 'easyArticle-unknown'
+    
     def get_data(self,
                  query=None,
                  cache_timeout=CACHE_TIMEOUT):
@@ -89,6 +115,8 @@ class BulLinkBase(TemplateView, JSONResponseMixin):
         exist.  A permalink will be created on save.
         """
         resource, created = Resource.objects.get_or_create(query=scrubbed_query)
+        resource.referrer = self.get_referrer()
+        resource.save()
         #Add logger message here.
         return resource
         

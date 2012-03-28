@@ -9,6 +9,7 @@ from baseconv import base62
 
 class Resource(models.Model):
     query = models.TextField()
+    referrer = models.CharField(max_length=200, blank=True, null=True)
     #http://djangosnippets.org/snippets/1017/
     date_created = models.DateTimeField()
     date_modified = models.DateTimeField()
