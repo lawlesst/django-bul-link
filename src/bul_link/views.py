@@ -60,11 +60,7 @@ class BulLinkBase(TemplateView, JSONResponseMixin):
     
     def get_referrer(self):
         """
-        Get the referring site and append to links headed elsewhere.  Helpful for
-        tracking down ILL request sources.  This should really be in a separate 
-        OpenURL parsing utility but was having trouble pulling it out given the
-        existing flow.  This ensures that it gets added to the OpenURL
-        that is generated from 360Link data. 
+        Get the referring site if possible.  Will be stored in the database. 
         """
         sid = None
         try:
