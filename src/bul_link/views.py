@@ -3,6 +3,7 @@ from django.core.cache import cache
 from django.http import HttpResponse
 from django.views.generic import TemplateView
 from django.core.urlresolvers import get_script_prefix
+from django.core.exceptions import MultipleObjectsReturned
 
 #standard lib
 import base64
@@ -110,7 +111,11 @@ class BulLinkBase(TemplateView, JSONResponseMixin):
         Try to find the requested resource in the local database.  If it doesn't
         exist.  A permalink will be created on save.
         """
-        resource, created = Resource.objects.get_or_create(query=scrubbed_query)
+        try:
+            resource, created = Resource.objects.get_or_create(query=scrubbed_query)
+        except MultipleObjectsReturned:
+            resource = Resource.objects.filter(query=scrubbed_query)[0]
+            created = False
         resource.referrer = self.get_referrer()
         resource.save()
         #Add logger message here.
